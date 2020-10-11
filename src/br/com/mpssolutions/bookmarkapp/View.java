@@ -1,12 +1,11 @@
 package br.com.mpssolutions.bookmarkapp;
 
-import java.util.Arrays;
-
 import br.com.mpssolutions.bookmarkapp.constants.KidFriendlyStatus;
 import br.com.mpssolutions.bookmarkapp.constants.UserType;
 import br.com.mpssolutions.bookmarkapp.controllers.BookmarkController;
 import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
 import br.com.mpssolutions.bookmarkapp.entities.User;
+import br.com.mpssolutions.bookmarkapp.partner.Shareable;
 
 public class View {
 
@@ -26,19 +25,34 @@ public class View {
 					}
 				}
 
-				// Mark as kid-friendly
+				
 				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.CHIEF_EDITOR)) {
+					
+					// Mark as kid-friendly
 					if (bookmark.isKidFriendlyEligible()
 							&& bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.UNKNOW)) {
 						String kidFriendlyStatus = getKidFriendlyDecision();
 						if(kidFriendlyStatus != KidFriendlyStatus.UNKNOW) {
-							bookmark.setKidFriendlyStatus(kidFriendlyStatus);
-							System.out.println("Kid-friendly status: " + kidFriendlyStatus + ", " + bookmark.getTitle());
+							BookmarkController.getInstance().setKidFriendlyStatus(kidFriendlyStatus, bookmark, user);
+						}
+					}
+					
+					// Sharing
+					
+					if(bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.APPROVED) && bookmark instanceof Shareable) {
+						boolean isShared = getShareDecision();
+						if(isShared) {
+							BookmarkController.getInstance().share(user, bookmark);
 						}
 					}
 				}
 			}
 		}
+	}
+
+	// TODO: Below methods simulate user input. After IO, we take input via console.
+	private static boolean getShareDecision() {
+		return Math.random() < 0.5 ? true : false;
 	}
 
 	private static String getKidFriendlyDecision() {

@@ -7,6 +7,7 @@ import br.com.mpssolutions.bookmarkapp.entities.Movie;
 import br.com.mpssolutions.bookmarkapp.entities.User;
 import br.com.mpssolutions.bookmarkapp.entities.UserBookmark;
 import br.com.mpssolutions.bookmarkapp.entities.WebLink;
+import br.com.mpssolutions.bookmarkapp.partner.Shareable;
 
 public class BookmarkManager {
 	private static BookmarkManager instance = new BookmarkManager();
@@ -71,5 +72,17 @@ public class BookmarkManager {
 		userBookmark.setBookmark(bookmark);
 		
 		dao.saveUserBookmark(userBookmark);
+	}
+
+	public void setKidFriendlyStatus(String kidFriendlyStatus, Bookmark bookmark, User user) {
+		bookmark.setKidFriendlyStatus(kidFriendlyStatus);
+		bookmark.setKidFriendlyMarkedBy(user);
+	}
+
+	public void share(User user, Bookmark bookmark) {
+		bookmark.setSharedBy(user);
+		
+		System.out.println(((Shareable) bookmark).getItemData());
+		
 	}
 }

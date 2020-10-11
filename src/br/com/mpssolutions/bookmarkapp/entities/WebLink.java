@@ -1,8 +1,10 @@
 package br.com.mpssolutions.bookmarkapp.entities;
 
-import java.util.Arrays;
+import org.apache.commons.lang3.StringUtils;
 
-public class WebLink extends Bookmark {
+import br.com.mpssolutions.bookmarkapp.partner.Shareable;
+
+public class WebLink extends Bookmark implements Shareable {
 	private String url;
 	private String host;
 
@@ -30,8 +32,22 @@ public class WebLink extends Bookmark {
 
 	@Override
 	public boolean isKidFriendlyEligible() {
-		if(url.toLowerCase().contains("porn") || this.getTitle().toLowerCase().contains("porn") || host.toLowerCase().contains("adult")) return false;
-		
+		if (url.toLowerCase().contains("porn") || this.getTitle().toLowerCase().contains("porn")
+				|| host.toLowerCase().contains("adult"))
+			return false;
+
 		return true;
+	}
+
+	@Override
+	public String getItemData() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("<item>");
+			builder.append("<type>WebLink</type>");
+			builder.append("<title>").append(getTitle()).append("</title>");
+			builder.append("<url>").append(url).append("</url>");
+			builder.append("<host>").append(host).append("</host>");
+		builder.append("</item>");
+		return builder.toString();
 	}
 }
