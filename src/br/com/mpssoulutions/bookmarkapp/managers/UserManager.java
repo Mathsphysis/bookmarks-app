@@ -1,5 +1,6 @@
 package br.com.mpssoulutions.bookmarkapp.managers;
 
+import br.com.mpssolutions.bookmarkapp.dao.UserDao;
 import br.com.mpssolutions.bookmarkapp.entities.User;
 
 /*
@@ -7,9 +8,12 @@ import br.com.mpssolutions.bookmarkapp.entities.User;
  * class and instantiating it using a private constructor
  */
 public class UserManager {
-	private static UserManager instance = new UserManager(); // As soon as the class loads, the single object will be
-																// instantiated.
-
+	
+	// As soon as the class loads, the single object will be instantiated.
+	private static UserManager instance = new UserManager(); 
+	
+	private static UserDao dao = new UserDao();
+	
 	private UserManager() {
 	}
 
@@ -29,5 +33,9 @@ public class UserManager {
 		user.setLastName(lastName);
 		
 		return user;
+	}
+	
+	public User[] getUsers() {
+		return dao.getUsers();
 	}
 }

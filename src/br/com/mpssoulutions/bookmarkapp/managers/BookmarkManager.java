@@ -1,12 +1,16 @@
 package br.com.mpssoulutions.bookmarkapp.managers;
 
+import br.com.mpssolutions.bookmarkapp.dao.BookmarkDao;
 import br.com.mpssolutions.bookmarkapp.entities.Book;
+import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
 import br.com.mpssolutions.bookmarkapp.entities.Movie;
 import br.com.mpssolutions.bookmarkapp.entities.WebLink;
 
 public class BookmarkManager {
 	private static BookmarkManager instance = new BookmarkManager();
 
+	private static BookmarkDao dao = new BookmarkDao();
+	
 	private BookmarkManager() {
 	}
 
@@ -53,5 +57,9 @@ public class BookmarkManager {
 		book.setTitle(title);
 		
 		return book;
+	}
+	
+	public Bookmark[][] getBookmarks(){
+		return dao.getBookmarks();
 	}
 }
