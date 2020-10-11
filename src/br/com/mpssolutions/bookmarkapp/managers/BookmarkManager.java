@@ -35,7 +35,7 @@ public class BookmarkManager {
 		return movie;
 	}
 
-	public WebLink createWebLink(long id, String title, String profileUrl, String host, String url) {
+	public WebLink createWebLink(long id, String title, String url, String host, String profileUrl) {
 		WebLink webLink = new WebLink();
 		webLink.setHost(host);
 		webLink.setId(id);

@@ -27,4 +27,11 @@ public class WebLink extends Bookmark {
 		return String.format("Web Link ID: %d%nTitle: %s%nURL: %s%nHost: %s%nProfile URL: %s%n%n", this.getId(),
 				this.getTitle(), url, host, this.getProfileUrl());
 	}
+
+	@Override
+	public boolean isKidFriendlyEligible() {
+		if(url.toLowerCase().contains("porn") || this.getTitle().toLowerCase().contains("porn") || host.toLowerCase().contains("adult")) return false;
+		
+		return true;
+	}
 }
