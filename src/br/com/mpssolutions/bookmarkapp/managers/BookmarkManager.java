@@ -4,6 +4,8 @@ import br.com.mpssolutions.bookmarkapp.dao.BookmarkDao;
 import br.com.mpssolutions.bookmarkapp.entities.Book;
 import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
 import br.com.mpssolutions.bookmarkapp.entities.Movie;
+import br.com.mpssolutions.bookmarkapp.entities.User;
+import br.com.mpssolutions.bookmarkapp.entities.UserBookmark;
 import br.com.mpssolutions.bookmarkapp.entities.WebLink;
 
 public class BookmarkManager {
@@ -61,5 +63,13 @@ public class BookmarkManager {
 	
 	public Bookmark[][] getBookmarks(){
 		return dao.getBookmarks();
+	}
+
+	public void saveUserBookmark(User user, Bookmark bookmark) {
+		UserBookmark userBookmark = new UserBookmark();
+		userBookmark.setUser(user);
+		userBookmark.setBookmark(bookmark);
+		
+		dao.saveUserBookmark(userBookmark);
 	}
 }
