@@ -1,5 +1,7 @@
 package br.com.mpssolutions.bookmarkapp.entities;
 
+import java.util.Arrays;
+
 public class Book extends Bookmark {
 	private int publicationYear;
 	private String publisher;
@@ -45,6 +47,13 @@ public class Book extends Bookmark {
 
 	public void setAmazonRating(double amazonRating) {
 		this.amazonRating = amazonRating;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("Book ID: %s%nTitle: %s%nPublication Year: %d%nAuthor(s): %s%n"
+				+ "Genre: %s%nAmazon Rating: %.1f%nProfile URL: %s%n%n", this.getId(), this.getTitle(), publicationYear,
+				Arrays.deepToString(authors), genre, amazonRating, this.getProfileUrl());
 	}
 
 }

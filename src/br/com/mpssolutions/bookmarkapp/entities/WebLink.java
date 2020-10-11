@@ -1,5 +1,7 @@
 package br.com.mpssolutions.bookmarkapp.entities;
 
+import java.util.Arrays;
+
 public class WebLink extends Bookmark {
 	private String url;
 	private String host;
@@ -20,4 +22,9 @@ public class WebLink extends Bookmark {
 		this.host = host;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Web Link ID: %d%nTitle: %s%nURL: %s%nHost: %s%nProfile URL: %s%n%n", this.getId(),
+				this.getTitle(), url, host, this.getProfileUrl());
+	}
 }

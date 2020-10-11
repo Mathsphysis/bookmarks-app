@@ -1,5 +1,7 @@
 package br.com.mpssolutions.bookmarkapp.entities;
 
+import java.util.Arrays;
+
 public class User {
 	private long id;
 	private String email;
@@ -65,4 +67,9 @@ public class User {
 		this.userType = userType;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("User ID: %s%nName: %s %s%nEmail: %s%nGender: %d%nUser Type: %s%n%n", id, firstName,
+				lastName, email, gender, userType);
+	}
 }

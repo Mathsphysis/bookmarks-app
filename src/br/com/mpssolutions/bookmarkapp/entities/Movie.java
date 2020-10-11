@@ -1,5 +1,7 @@
 package br.com.mpssolutions.bookmarkapp.entities;
 
+import java.util.Arrays;
+
 public class Movie extends Bookmark {
 	private int releaseYear;
 	private String[] cast;
@@ -45,6 +47,13 @@ public class Movie extends Bookmark {
 
 	public void setImdbRating(double imdbRating) {
 		this.imdbRating = imdbRating;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("Movie ID: %s%nTitle: %s%nRelease Year: %d%nCast: %s%nDiretor(s): %s%n"
+				+ "Genre: %s%nIMDB Rating: %.1f%nProfile URL: %s%n%n", this.getId(), this.getTitle(), releaseYear,
+				Arrays.deepToString(cast), Arrays.deepToString(directors), genre, imdbRating, this.getProfileUrl());
 	}
 
 }
