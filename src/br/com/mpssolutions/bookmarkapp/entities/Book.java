@@ -3,7 +3,7 @@ package br.com.mpssolutions.bookmarkapp.entities;
 public class Book extends Bookmark {
 	private int publicationYear;
 	private String publisher;
-	private String authors;
+	private String[] authors;
 	private String genre;
 	private double amazonRating;
 
@@ -23,11 +23,11 @@ public class Book extends Bookmark {
 		this.publisher = publisher;
 	}
 
-	public String getAuthors() {
+	public String[] getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(String authors) {
+	public void setAuthors(String[] authors) {
 		this.authors = authors;
 	}
 
