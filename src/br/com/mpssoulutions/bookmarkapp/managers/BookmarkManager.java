@@ -14,8 +14,8 @@ public class BookmarkManager {
 		return instance;
 	}
 
-	public Movie createMovie(long id, String profileUrl, String title, String[] cast, String[] directors, String genre,
-			double imdbRating, int releaseYear) {
+	public Movie createMovie(long id, String title, int releaseYear, String[] cast, String[] directors, String genre,
+			double imdbRating, String profileUrl) {
 		Movie movie = new Movie();
 		movie.setCast(cast);
 		movie.setDirectors(directors);
@@ -29,7 +29,7 @@ public class BookmarkManager {
 		return movie;
 	}
 
-	public WebLink createWebLink(long id, String profileUrl, String title, String host, String url) {
+	public WebLink createWebLink(long id, String title, String profileUrl, String host, String url) {
 		WebLink webLink = new WebLink();
 		webLink.setHost(host);
 		webLink.setId(id);
@@ -40,8 +40,8 @@ public class BookmarkManager {
 		return webLink;
 	}
 
-	public Book createBook(long id, String profileUrl, String title, String[] authors, String genre, String publisher,
-			double amazonRating, int publicationYear) {
+	public Book createBook(long id, String title, int publicationYear, String publisher, String[] authors, String genre, 
+			double amazonRating,  String profileUrl) {
 		Book book = new Book();
 		book.setAmazonRating(amazonRating);
 		book.setAuthors(authors);
