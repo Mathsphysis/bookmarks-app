@@ -1,4 +1,4 @@
-package br.com.mpssoulutions.bookmarkapp.managers;
+package br.com.mpssolutions.bookmarkapp.managers;
 
 import br.com.mpssolutions.bookmarkapp.dao.UserDao;
 import br.com.mpssolutions.bookmarkapp.entities.User;

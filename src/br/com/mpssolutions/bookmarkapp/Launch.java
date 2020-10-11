@@ -2,8 +2,8 @@ package br.com.mpssolutions.bookmarkapp;
 
 import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
 import br.com.mpssolutions.bookmarkapp.entities.User;
-import br.com.mpssoulutions.bookmarkapp.managers.BookmarkManager;
-import br.com.mpssoulutions.bookmarkapp.managers.UserManager;
+import br.com.mpssolutions.bookmarkapp.managers.BookmarkManager;
+import br.com.mpssolutions.bookmarkapp.managers.UserManager;
 
 public class Launch {
 	

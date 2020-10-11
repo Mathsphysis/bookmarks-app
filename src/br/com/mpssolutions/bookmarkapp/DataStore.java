@@ -7,8 +7,8 @@ import br.com.mpssolutions.bookmarkapp.constants.UserType;
 import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
 import br.com.mpssolutions.bookmarkapp.entities.User;
 import br.com.mpssolutions.bookmarkapp.entities.UserBookmark;
-import br.com.mpssoulutions.bookmarkapp.managers.BookmarkManager;
-import br.com.mpssoulutions.bookmarkapp.managers.UserManager;
+import br.com.mpssolutions.bookmarkapp.managers.BookmarkManager;
+import br.com.mpssolutions.bookmarkapp.managers.UserManager;
 
 public class DataStore {
 	private static final int USER_BOOKMARK_LIMIT = 5;
