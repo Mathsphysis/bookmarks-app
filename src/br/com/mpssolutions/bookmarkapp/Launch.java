@@ -20,7 +20,7 @@ public class Launch {
 		//System.out.println("Printing data ...%n");
 		
 		//printUserData();
-		printBookmarkData();
+		//printBookmarkData();
 	}
 	
 	private static void printUserData() {
