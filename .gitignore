@@ -1,6 +1,7 @@
 .metadata
 bin/
 tmp/
+pages/
 *.tmp
 *.bak
 *.swp

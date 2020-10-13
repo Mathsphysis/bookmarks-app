@@ -1,5 +1,8 @@
 package br.com.mpssolutions.bookmarkapp.managers;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+
 import br.com.mpssolutions.bookmarkapp.dao.BookmarkDao;
 import br.com.mpssolutions.bookmarkapp.entities.Book;
 import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
@@ -8,6 +11,8 @@ import br.com.mpssolutions.bookmarkapp.entities.User;
 import br.com.mpssolutions.bookmarkapp.entities.UserBookmark;
 import br.com.mpssolutions.bookmarkapp.entities.WebLink;
 import br.com.mpssolutions.bookmarkapp.partner.Shareable;
+import br.com.mpssolutions.bookmarkapp.util.HttpConnect;
+import br.com.mpssolutions.bookmarkapp.util.IOUtil;
 
 public class BookmarkManager {
 	private static BookmarkManager instance = new BookmarkManager();
@@ -70,6 +75,24 @@ public class BookmarkManager {
 		UserBookmark userBookmark = new UserBookmark();
 		userBookmark.setUser(user);
 		userBookmark.setBookmark(bookmark);
+		
+		if(bookmark instanceof WebLink) {
+			try {
+				String url = ((WebLink)bookmark).getUrl();
+				if(!url.endsWith(".pdf")){
+					String webpage = HttpConnect.download(url);
+					if(webpage != null) {
+						IOUtil.write(webpage, bookmark.getId());
+					}
+				}
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		dao.saveUserBookmark(userBookmark);
 	}
