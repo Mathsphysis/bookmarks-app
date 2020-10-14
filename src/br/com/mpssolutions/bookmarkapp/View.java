@@ -1,5 +1,7 @@
 package br.com.mpssolutions.bookmarkapp;
 
+import java.util.List;
+
 import br.com.mpssolutions.bookmarkapp.constants.KidFriendlyStatus;
 import br.com.mpssolutions.bookmarkapp.constants.UserType;
 import br.com.mpssolutions.bookmarkapp.controllers.BookmarkController;
@@ -9,21 +11,18 @@ import br.com.mpssolutions.bookmarkapp.partner.Shareable;
 
 public class View {
 
-	public static void browse(User user, Bookmark[][] bookmarks) {
+	public static void browse(User user, List<List<Bookmark>> bookmarks) {
 		System.out.println('\n' + user.getEmail() + " is browsing items.");
 
-		int bookmarkCount = 0;
-
-		for (Bookmark[] bookmarkList : bookmarks) {
+		for (List<Bookmark> bookmarkList : bookmarks) {
 			for (Bookmark bookmark : bookmarkList) {
 				// Bookmarking
-				if (bookmarkCount < DataStore.USER_BOOKMARK_LIMIT) {
+			
 					boolean isBookmarked = getBookmarkDecision(bookmark);
 					if (isBookmarked) {
 						BookmarkController.getInstance().saveUserBookmark(user, bookmark);
-						bookmarkCount++;
 					}
-				}
+				
 
 				
 				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.CHIEF_EDITOR)) {

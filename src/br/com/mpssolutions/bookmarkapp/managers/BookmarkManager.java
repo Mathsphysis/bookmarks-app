@@ -2,6 +2,7 @@ package br.com.mpssolutions.bookmarkapp.managers;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import br.com.mpssolutions.bookmarkapp.dao.BookmarkDao;
 import br.com.mpssolutions.bookmarkapp.entities.Book;
@@ -67,7 +68,7 @@ public class BookmarkManager {
 		return book;
 	}
 	
-	public Bookmark[][] getBookmarks(){
+	public List<List<Bookmark>> getBookmarks(){
 		return dao.getBookmarks();
 	}
 

@@ -1,5 +1,7 @@
 package br.com.mpssolutions.bookmarkapp;
 
+import java.util.List;
+
 import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
 import br.com.mpssolutions.bookmarkapp.entities.User;
 import br.com.mpssolutions.bookmarkapp.managers.BookmarkManager;
@@ -7,8 +9,8 @@ import br.com.mpssolutions.bookmarkapp.managers.UserManager;
 
 public class Launch {
 	
-	private static User[] users;
-	private static Bookmark[][] bookmarks;
+	private static List<User> users;
+	private static List<List<Bookmark>> bookmarks;
 	
 	private static void loadData() {
 		System.out.println("1. Loading Data...");
@@ -31,7 +33,7 @@ public class Launch {
 	}
 	
 	private static void printBookmarkData() {
-		for(Bookmark[] bookmarkList : bookmarks) {
+		for(List<Bookmark> bookmarkList : bookmarks) {
 			for(Bookmark bookmark : bookmarkList) {
 				System.out.println(bookmark);
 			}

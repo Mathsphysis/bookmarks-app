@@ -1,5 +1,7 @@
 package br.com.mpssolutions.bookmarkapp.managers;
 
+import java.util.List;
+
 import br.com.mpssolutions.bookmarkapp.dao.UserDao;
 import br.com.mpssolutions.bookmarkapp.entities.User;
 
@@ -35,7 +37,7 @@ public class UserManager {
 		return user;
 	}
 	
-	public User[] getUsers() {
+	public List<User> getUsers() {
 		return dao.getUsers();
 	}
 }
