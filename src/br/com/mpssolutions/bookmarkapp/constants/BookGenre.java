@@ -1,16 +1,25 @@
 package br.com.mpssolutions.bookmarkapp.constants;
 
-public class BookGenre {
-	private BookGenre() {}
+public enum BookGenre {
 	
-	public static final String BIOGRAPHY = "biography";
-	public static final String CHILDREN = "children";
-	public static final String FICTION = "fiction";
-	public static final String HISTORY = "history";
-	public static final String MYSTERY = "mystery";
-	public static final String PHILOSOPHY = "philosophy";
-	public static final String RELIGION = "religion";
-	public static final String ROMANCE = "romance";
-	public static final String SELF_HELP = "self help";
-	public static final String TECHNICAL = "technical";
+	 BIOGRAPHY("biography"),
+	 CHILDREN("children"),
+	 FICTION("fiction"),
+	 HISTORY("history"),
+	 MYSTERY("mystery"),
+	 PHILOSOPHY("philosophy"),
+	 RELIGION("religion"),
+	 ROMANCE("romance"),
+	 SELF_HELP("self help"),
+	 TECHNICAL("technical");
+	
+	private BookGenre(String name) {
+		this.name = name;
+	}
+	
+	private String name;
+	public String getName() {
+		return name;
+	}
+	
 }

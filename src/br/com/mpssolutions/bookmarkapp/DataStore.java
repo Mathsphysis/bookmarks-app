@@ -3,7 +3,10 @@ package br.com.mpssolutions.bookmarkapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.mpssolutions.bookmarkapp.constants.BookGenre;
 import br.com.mpssolutions.bookmarkapp.constants.Gender;
+import br.com.mpssolutions.bookmarkapp.constants.MovieGenre;
+import br.com.mpssolutions.bookmarkapp.constants.UserType;
 import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
 import br.com.mpssolutions.bookmarkapp.entities.User;
 import br.com.mpssolutions.bookmarkapp.entities.UserBookmark;
@@ -43,7 +46,7 @@ public class DataStore {
 		for (String row : data) {
 			String[] values = row.split("\t");
 
-			int gender = Gender.MALE;
+			Gender gender = Gender.MALE;
 			if (values[5].equals("f")) {
 				gender = Gender.FEMALE;
 			} else if (values[5].equals("t")) {
@@ -51,7 +54,7 @@ public class DataStore {
 			}
 
 			User user = UserManager.getInstance().createUser(Long.parseLong(values[0]), values[1], values[2],
-					values[3], values[4], gender, values[6]);
+					values[3], values[4], gender, UserType.valueOf(values[6]));
 			users.add(user);
 		}
 	}
@@ -82,7 +85,7 @@ public class DataStore {
 			String[] values = row.split("\t");
 			String[] authors = values[4].split(",");
 			Bookmark book = BookmarkManager.getInstance().createBook(Long.parseLong(values[0]), values[1],
-					Integer.parseInt(values[2]), values[3], authors, values[5], Double.parseDouble(values[6]), "unknown");
+					Integer.parseInt(values[2]), values[3], authors, BookGenre.valueOf(values[5].toUpperCase()), Double.parseDouble(values[6]), "unknown");
 			bookmarkList.add(book);
 		}
 		
@@ -100,7 +103,7 @@ public class DataStore {
 			String[] directors = values[4].split(",");
 			String[] cast = values[3].split(",");
 			Bookmark movie = BookmarkManager.getInstance().createMovie(Long.parseLong(values[0]), values[1],
-					Integer.parseInt(values[2]), cast, directors, values[5], Double.parseDouble(values[6]), "unknown");
+					Integer.parseInt(values[2]), cast, directors, MovieGenre.valueOf(values[5]), Double.parseDouble(values[6]), "unknown");
 			bookmarkList.add(movie);
 		}
 		

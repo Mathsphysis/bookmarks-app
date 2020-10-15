@@ -1,9 +1,18 @@
 package br.com.mpssolutions.bookmarkapp.constants;
 
-public class KidFriendlyStatus {
-	private KidFriendlyStatus() {}
+public enum KidFriendlyStatus {
 	
-	public static final String APPROVED = "approved";
-	public static final String REJECTED = "rejected";
-	public static final String UNKNOW = "unknow";
+	APPROVED("approved"),
+	REJECTED("rejected"),
+	UNKNOW("unknow");
+	
+	private KidFriendlyStatus(String name) {
+		this.name = name;
+	}
+	
+	private String name;
+	
+	public String getName() {
+		return name;
+	}
 }

@@ -4,6 +4,9 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import br.com.mpssolutions.bookmarkapp.constants.BookGenre;
+import br.com.mpssolutions.bookmarkapp.constants.KidFriendlyStatus;
+import br.com.mpssolutions.bookmarkapp.constants.MovieGenre;
 import br.com.mpssolutions.bookmarkapp.dao.BookmarkDao;
 import br.com.mpssolutions.bookmarkapp.entities.Book;
 import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
@@ -27,7 +30,7 @@ public class BookmarkManager {
 		return instance;
 	}
 
-	public Movie createMovie(long id, String title, int releaseYear, String[] cast, String[] directors, String genre,
+	public Movie createMovie(long id, String title, int releaseYear, String[] cast, String[] directors, MovieGenre genre,
 			double imdbRating, String profileUrl) {
 		Movie movie = new Movie();
 		movie.setCast(cast);
@@ -53,7 +56,7 @@ public class BookmarkManager {
 		return webLink;
 	}
 
-	public Book createBook(long id, String title, int publicationYear, String publisher, String[] authors, String genre, 
+	public Book createBook(long id, String title, int publicationYear, String publisher, String[] authors, BookGenre genre, 
 			double amazonRating,  String profileUrl) {
 		Book book = new Book();
 		book.setAmazonRating(amazonRating);
@@ -98,7 +101,7 @@ public class BookmarkManager {
 		dao.saveUserBookmark(userBookmark);
 	}
 
-	public void setKidFriendlyStatus(String kidFriendlyStatus, Bookmark bookmark, User user) {
+	public void setKidFriendlyStatus(KidFriendlyStatus kidFriendlyStatus, Bookmark bookmark, User user) {
 		bookmark.setKidFriendlyStatus(kidFriendlyStatus);
 		bookmark.setKidFriendlyMarkedBy(user);
 	}

@@ -1,6 +1,7 @@
 package br.com.mpssolutions.bookmarkapp.entities;
 
-import java.util.Arrays;
+import br.com.mpssolutions.bookmarkapp.constants.Gender;
+import br.com.mpssolutions.bookmarkapp.constants.UserType;
 
 public class User {
 	private long id;
@@ -8,8 +9,8 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
-	private int gender;
-	private String userType;
+	private Gender gender;
+	private UserType userType;
 
 	public long getId() {
 		return id;
@@ -51,25 +52,25 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public int getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
-	public String getUserType() {
+	public UserType getUserType() {
 		return userType;
 	}
 
-	public void setUserType(String userType) {
+	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("User ID: %s%nName: %s %s%nEmail: %s%nGender: %d%nUser Type: %s%n%n", id, firstName,
+		return String.format("User ID: %s%nName: %s %s%nEmail: %s%nGender: %s%nUser Type: %s%n%n", id, firstName,
 				lastName, email, gender, userType);
 	}
 }
