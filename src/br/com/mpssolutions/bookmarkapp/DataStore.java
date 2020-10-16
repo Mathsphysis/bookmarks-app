@@ -54,7 +54,7 @@ public class DataStore {
 			}
 
 			User user = UserManager.getInstance().createUser(Long.parseLong(values[0]), values[1], values[2],
-					values[3], values[4], gender, UserType.valueOf(values[6]));
+					values[3], values[4], gender, UserType.valueOf(values[6].toUpperCase()));
 			users.add(user);
 		}
 	}
@@ -103,7 +103,7 @@ public class DataStore {
 			String[] directors = values[4].split(",");
 			String[] cast = values[3].split(",");
 			Bookmark movie = BookmarkManager.getInstance().createMovie(Long.parseLong(values[0]), values[1],
-					Integer.parseInt(values[2]), cast, directors, MovieGenre.valueOf(values[5]), Double.parseDouble(values[6]), "unknown");
+					Integer.parseInt(values[2]), cast, directors, MovieGenre.valueOf(values[5].toUpperCase()), Double.parseDouble(values[6]), "unknown");
 			bookmarkList.add(movie);
 		}
 		

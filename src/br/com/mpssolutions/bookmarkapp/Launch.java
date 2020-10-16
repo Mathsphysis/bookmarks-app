@@ -2,6 +2,7 @@ package br.com.mpssolutions.bookmarkapp;
 
 import java.util.List;
 
+import br.com.mpssolutions.bookmarkapp.backgroundjobs.WebPageDownloaderTask;
 import br.com.mpssolutions.bookmarkapp.entities.Bookmark;
 import br.com.mpssolutions.bookmarkapp.entities.User;
 import br.com.mpssolutions.bookmarkapp.managers.BookmarkManager;
@@ -19,10 +20,6 @@ public class Launch {
 		users = UserManager.getInstance().getUsers();
 		bookmarks = BookmarkManager.getInstance().getBookmarks();
 		
-		//System.out.println("Printing data ...%n");
-		
-		//printUserData();
-		//printBookmarkData();
 	}
 	
 	private static void printUserData() {
@@ -51,6 +48,15 @@ public class Launch {
 	public static void main(String[] args) {
 		loadData();
 		start();
+		
+		// Background Jobs
+		runDownloaderJob();
+	}
+
+	private static void runDownloaderJob() {
+		WebPageDownloaderTask task = new WebPageDownloaderTask(true);
+		(new Thread(task)).start();
+		
 	}
 
 	

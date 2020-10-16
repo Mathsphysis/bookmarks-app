@@ -18,6 +18,15 @@ public class HttpConnect {
 			
 			if(responseCode >= 200 && responseCode < 300) {
 				return IOUtil.read(con.getInputStream());
+			} else if(responseCode == 301) { 
+				String redirect = con.getHeaderField("Location");
+				if(redirect != null) {
+					URL redirectUrl = new URL(redirect);
+					con = (HttpURLConnection)redirectUrl.openConnection();
+				}
+				return IOUtil.read(con.getInputStream());
+			} else {
+				System.out.println(url.toString() + " Failed!! Response code: " + responseCode);
 			}
 		} catch(IOException e) {
 			// TODO Auto-generated catch block

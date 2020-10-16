@@ -35,9 +35,9 @@ public class IOUtil {
 		StringBuilder builder = new StringBuilder();
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"))){
 			String line;
-			int count = 0;
+			
 			while((line = br.readLine()) != null) {
-				builder.append(line).append("%n");
+				builder.append(line).append("\n");
 			}
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
@@ -51,7 +51,7 @@ public class IOUtil {
 	}
 
 	public static void write(String webpage, long id) {
-		try(BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D://Projetos//Projetos para portfolio/bookmark-app/pages/" + String.valueOf(id) + ".html"), "UTF-8"))){
+		try(BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:/Projetos/Projetos para portfolio/bookmark-app/pages/" + String.valueOf(id) + ".html"), "UTF-8"))){
 			bw.write(webpage);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
