@@ -42,15 +42,9 @@ public class DataStore {
 
 	public static void loadData() {
 		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
 		// try-with-resources ==> conn & stmt will be closed
 		// Connection string: <protocol>:<sub-protocol>:<data-source details>
-		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jid_thrillio?useSSL=false", "root", "root");
+		try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3316/bookmark_app_db?useSSL=false", "root", "root");
 				Statement stmt = conn.createStatement();) {
 			loadUsers(stmt);    // Student is expected to implement this method
 			loadWebLinks(stmt); // Student is expected to implement this method
@@ -103,7 +97,7 @@ public class DataStore {
 			
 			Date createdDate = rs.getDate("created_date");
 			System.out.println("createdDate: " + createdDate);
-			Timestamp timeStamp = rs.getTimestamp(8);
+			Timestamp timeStamp = rs.getTimestamp(6);
 			System.out.println("timeStamp: " + timeStamp);
 			System.out.println("localDateTime: " + timeStamp.toLocalDateTime());
 			
@@ -128,6 +122,7 @@ public class DataStore {
 			String publisher = rs.getString("name");		
 			String[] authors = rs.getString("authors").split(",");			
 			int genre_id = rs.getInt("book_genre_id");
+			System.out.println(genre_id);
 			BookGenre genre = BookGenre.values()[genre_id];
 			double amazonRating = rs.getDouble("amazon_rating");
 			
