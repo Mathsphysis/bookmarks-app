@@ -3,17 +3,14 @@ package br.com.mpssolutions.bookmarkapp.entities;
 import br.com.mpssolutions.bookmarkapp.partner.Shareable;
 
 public class WebLink extends Bookmark implements Shareable {
-	
+
 	private String url;
 	private String host;
 	private String htmlPage;
 	private DownloadStatus downloadStatus = DownloadStatus.NOT_ATTEMPTED;
 
 	public enum DownloadStatus {
-		NOT_ATTEMPTED,
-		SUCCESS,
-		FAILED,
-		NOT_ELIGIBLE;
+		NOT_ATTEMPTED, SUCCESS, FAILED, NOT_ELIGIBLE;
 	}
 
 	public String getUrl() {
@@ -51,10 +48,10 @@ public class WebLink extends Bookmark implements Shareable {
 	public String getItemData() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("<item>");
-			builder.append("<type>WebLink</type>");
-			builder.append("<title>").append(getTitle()).append("</title>");
-			builder.append("<url>").append(url).append("</url>");
-			builder.append("<host>").append(host).append("</host>");
+		builder.append("<type>WebLink</type>");
+		builder.append("<title>").append(getTitle()).append("</title>");
+		builder.append("<url>").append(url).append("</url>");
+		builder.append("<host>").append(host).append("</host>");
 		builder.append("</item>");
 		return builder.toString();
 	}

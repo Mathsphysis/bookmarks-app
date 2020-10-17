@@ -33,7 +33,7 @@ public abstract class Bookmark {
 	public void setProfileUrl(String profileUrl) {
 		this.profileUrl = profileUrl;
 	}
-	
+
 	public KidFriendlyStatus getKidFriendlyStatus() {
 		return kidFriendlyStatus;
 	}

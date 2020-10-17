@@ -12,12 +12,12 @@ import br.com.mpssolutions.bookmarkapp.entities.User;
  * class and instantiating it using a private constructor
  */
 public class UserManager {
-	
+
 	// As soon as the class loads, the single object will be instantiated.
-	private static UserManager instance = new UserManager(); 
-	
+	private static UserManager instance = new UserManager();
+
 	private static UserDao dao = new UserDao();
-	
+
 	private UserManager() {
 	}
 
@@ -25,9 +25,9 @@ public class UserManager {
 		return instance;
 	}
 
-	public User createUser(long id, String email, String password, String firstName, String lastName,  Gender gender,
+	public User createUser(long id, String email, String password, String firstName, String lastName, Gender gender,
 			UserType userType) {
-		User user= new User();
+		User user = new User();
 		user.setId(id);
 		user.setEmail(email);
 		user.setFirstName(firstName);
@@ -35,10 +35,10 @@ public class UserManager {
 		user.setLastName(lastName);
 		user.setUserType(userType);
 		user.setLastName(lastName);
-		
+
 		return user;
 	}
-	
+
 	public List<User> getUsers() {
 		return dao.getUsers();
 	}

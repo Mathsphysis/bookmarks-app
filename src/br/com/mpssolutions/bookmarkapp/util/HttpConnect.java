@@ -8,31 +8,30 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class HttpConnect {
-	public static String download(String sourceUrl) throws MalformedURLException, URISyntaxException{
+	public static String download(String sourceUrl) throws MalformedURLException, URISyntaxException {
 		System.out.println("Downloading: " + sourceUrl);
 		URL url = new URI(sourceUrl).toURL();
-		
+
 		try {
-			HttpURLConnection con = (HttpURLConnection)url.openConnection();
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			int responseCode = con.getResponseCode();
-			
-			if(responseCode >= 200 && responseCode < 300) {
+
+			if (responseCode >= 200 && responseCode < 300) {
 				return IOUtil.read(con.getInputStream());
-			} else if(responseCode == 301) { 
+			} else if (responseCode == 301) {
 				String redirect = con.getHeaderField("Location");
-				if(redirect != null) {
+				if (redirect != null) {
 					URL redirectUrl = new URL(redirect);
-					con = (HttpURLConnection)redirectUrl.openConnection();
+					con = (HttpURLConnection) redirectUrl.openConnection();
 				}
 				return IOUtil.read(con.getInputStream());
 			} else {
 				System.out.println(url.toString() + " Failed!! Response code: " + responseCode);
 			}
-		} catch(IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 }

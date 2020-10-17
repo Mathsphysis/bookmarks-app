@@ -17,26 +17,26 @@ import br.com.mpssolutions.bookmarkapp.entities.WebLink.DownloadStatus;
 import br.com.mpssolutions.bookmarkapp.util.HttpConnect;
 import br.com.mpssolutions.bookmarkapp.util.IOUtil;
 
-public class WebPageDownloaderTask implements Runnable{
+public class WebPageDownloaderTask implements Runnable {
 
 	private static BookmarkDao dao = new BookmarkDao();
-	
+
 	private static final long TIME_FRAME = 300000000; // 3 seconds
-	
+
 	private boolean downloadAll = false;
-	
+
 	ExecutorService downloadExecutor = Executors.newFixedThreadPool(5);
 
 	private static class Downloader<T extends WebLink> implements Callable<T> {
 		private T webLink;
-		
+
 		public Downloader(T webLink) {
 			this.webLink = webLink;
 		}
-		
+
 		public T call() {
 			try {
-				if(!webLink.getUrl().endsWith(".pdf")) {
+				if (!webLink.getUrl().endsWith(".pdf")) {
 					webLink.setDownloadStatus(DownloadStatus.FAILED);
 					String htmlPage = HttpConnect.download(webLink.getUrl());
 					webLink.setHtmlPage(htmlPage);
@@ -44,7 +44,7 @@ public class WebPageDownloaderTask implements Runnable{
 				} else {
 					webLink.setDownloadStatus(DownloadStatus.NOT_ELIGIBLE);
 				}
-			} catch(MalformedURLException e) {
+			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
@@ -52,46 +52,45 @@ public class WebPageDownloaderTask implements Runnable{
 			return webLink;
 		}
 	}
-	
-	
+
 	@Override
 	public void run() {
-		while(!Thread.currentThread().isInterrupted()) {
+		while (!Thread.currentThread().isInterrupted()) {
 			List<WebLink> webLinks = getWebLinks();
-			
-			if(webLinks.size() > 0) {
+
+			if (webLinks.size() > 0) {
 				download(webLinks);
 			} else {
 				System.out.println("No new Web Links to download!");
 			}
-			
+
 			try {
 				TimeUnit.SECONDS.sleep(15);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		downloadExecutor.shutdown();
-		
+
 	}
-	
+
 	private void download(List<WebLink> webLinks) {
 		List<Downloader<WebLink>> tasks = getTasks(webLinks);
 		List<Future<WebLink>> futures = new ArrayList<>();
-		
+
 		try {
 			futures = downloadExecutor.invokeAll(tasks, TIME_FRAME, TimeUnit.NANOSECONDS);
-		} catch(InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		for(Future<WebLink> future : futures) {
+
+		for (Future<WebLink> future : futures) {
 			try {
-				if(!future.isCancelled()) {
+				if (!future.isCancelled()) {
 					WebLink webLink = future.get();
 					String webPage = webLink.getHtmlPage();
-					if(webPage != null) {
+					if (webPage != null) {
 						IOUtil.write(webPage, webLink.getId());
 						webLink.setDownloadStatus(WebLink.DownloadStatus.SUCCESS);
 						System.out.println("Download Success: " + webLink.getUrl());
@@ -99,18 +98,18 @@ public class WebPageDownloaderTask implements Runnable{
 						System.out.println("Webpage not downloaded!");
 					}
 				}
-			} catch(InterruptedException e) {
+			} catch (InterruptedException e) {
 				e.printStackTrace();
-			} catch(ExecutionException e) {
+			} catch (ExecutionException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	private List<Downloader<WebLink>> getTasks(List<WebLink> webLinks) {
 		List<Downloader<WebLink>> tasks = new ArrayList<>();
-		for (WebLink webLink  : webLinks) {
+		for (WebLink webLink : webLinks) {
 			tasks.add(new Downloader<WebLink>(webLink));
 		}
 		return tasks;
@@ -118,14 +117,14 @@ public class WebPageDownloaderTask implements Runnable{
 
 	private List<WebLink> getWebLinks() {
 		List<WebLink> webLinks = null;
-		
-		if(downloadAll) {
+
+		if (downloadAll) {
 			webLinks = dao.getAllWebLinks();
 			downloadAll = false;
 		} else {
 			webLinks = dao.getWebLinks(WebLink.DownloadStatus.NOT_ATTEMPTED);
 		}
-		
+
 		return webLinks;
 	}
 

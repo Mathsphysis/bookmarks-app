@@ -22,7 +22,7 @@ public class BookmarkManager {
 	private static BookmarkManager instance = new BookmarkManager();
 
 	private static BookmarkDao dao = new BookmarkDao();
-	
+
 	private BookmarkManager() {
 	}
 
@@ -30,8 +30,8 @@ public class BookmarkManager {
 		return instance;
 	}
 
-	public Movie createMovie(long id, String title, int releaseYear, String[] cast, String[] directors, MovieGenre genre,
-			double imdbRating, String profileUrl) {
+	public Movie createMovie(long id, String title, int releaseYear, String[] cast, String[] directors,
+			MovieGenre genre, double imdbRating, String profileUrl) {
 		Movie movie = new Movie();
 		movie.setCast(cast);
 		movie.setDirectors(directors);
@@ -52,12 +52,12 @@ public class BookmarkManager {
 		webLink.setProfileUrl(profileUrl);
 		webLink.setTitle(title);
 		webLink.setUrl(url);
-		
+
 		return webLink;
 	}
 
-	public Book createBook(long id, String title, int publicationYear, String publisher, String[] authors, BookGenre genre, 
-			double amazonRating,  String profileUrl) {
+	public Book createBook(long id, String title, int publicationYear, String publisher, String[] authors,
+			BookGenre genre, double amazonRating, String profileUrl) {
 		Book book = new Book();
 		book.setAmazonRating(amazonRating);
 		book.setAuthors(authors);
@@ -67,11 +67,11 @@ public class BookmarkManager {
 		book.setPublicationYear(publicationYear);
 		book.setPublisher(publisher);
 		book.setTitle(title);
-		
+
 		return book;
 	}
-	
-	public List<List<Bookmark>> getBookmarks(){
+
+	public List<List<Bookmark>> getBookmarks() {
 		return dao.getBookmarks();
 	}
 
@@ -79,40 +79,38 @@ public class BookmarkManager {
 		UserBookmark userBookmark = new UserBookmark();
 		userBookmark.setUser(user);
 		userBookmark.setBookmark(bookmark);
-		
-		if(bookmark instanceof WebLink) {
+
+		if (bookmark instanceof WebLink) {
 			try {
-				String url = ((WebLink)bookmark).getUrl();
-				if(!url.endsWith(".pdf")){
+				String url = ((WebLink) bookmark).getUrl();
+				if (!url.endsWith(".pdf")) {
 					String webpage = HttpConnect.download(url);
-					if(webpage != null) {
+					if (webpage != null) {
 						IOUtil.write(webpage, bookmark.getId());
 					}
 				}
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
+
 		dao.saveUserBookmark(userBookmark);
 	}
 
 	public void setKidFriendlyStatus(KidFriendlyStatus kidFriendlyStatus, Bookmark bookmark, User user) {
 		bookmark.setKidFriendlyStatus(kidFriendlyStatus);
 		bookmark.setKidFriendlyMarkedBy(user);
-		
+
 		dao.updateKidFriendlyStatus(bookmark);
 	}
 
 	public void share(User user, Bookmark bookmark) {
 		bookmark.setSharedBy(user);
-		
+
 		dao.updateSharedBy(bookmark);
 		System.out.println(((Shareable) bookmark).getItemData());
-		
+
 	}
 }

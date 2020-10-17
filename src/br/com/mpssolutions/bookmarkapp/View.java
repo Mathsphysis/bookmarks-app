@@ -17,30 +17,29 @@ public class View {
 		for (List<Bookmark> bookmarkList : bookmarks) {
 			for (Bookmark bookmark : bookmarkList) {
 				// Bookmarking
-			
-					boolean isBookmarked = getBookmarkDecision(bookmark);
-					if (isBookmarked) {
-						BookmarkController.getInstance().saveUserBookmark(user, bookmark);
-					}
-				
 
-				
+				boolean isBookmarked = getBookmarkDecision(bookmark);
+				if (isBookmarked) {
+					BookmarkController.getInstance().saveUserBookmark(user, bookmark);
+				}
+
 				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.CHIEF_EDITOR)) {
-					
+
 					// Mark as kid-friendly
 					if (bookmark.isKidFriendlyEligible()
 							&& bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.UNKNOW)) {
 						KidFriendlyStatus kidFriendlyStatus = getKidFriendlyDecision();
-						if(kidFriendlyStatus != KidFriendlyStatus.UNKNOW) {
+						if (kidFriendlyStatus != KidFriendlyStatus.UNKNOW) {
 							BookmarkController.getInstance().setKidFriendlyStatus(kidFriendlyStatus, bookmark, user);
 						}
 					}
-					
+
 					// Sharing
-					
-					if(bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.APPROVED) && bookmark instanceof Shareable) {
+
+					if (bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.APPROVED)
+							&& bookmark instanceof Shareable) {
 						boolean isShared = getShareDecision();
-						if(isShared) {
+						if (isShared) {
 							BookmarkController.getInstance().share(user, bookmark);
 						}
 					}

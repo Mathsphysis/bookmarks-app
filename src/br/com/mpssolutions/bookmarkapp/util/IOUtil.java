@@ -14,55 +14,50 @@ import java.util.List;
 
 public class IOUtil {
 	public static void read(List<String> data, String filename) {
-		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-8"))){
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-8"))) {
 			String line;
-			while((line = br.readLine()) != null) {
+			while ((line = br.readLine()) != null) {
 				data.add(line);
 			}
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	public static String read(InputStream in) {
 		StringBuilder builder = new StringBuilder();
-		try(BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"))){
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"))) {
 			String line;
-			
-			while((line = br.readLine()) != null) {
+
+			while ((line = br.readLine()) != null) {
 				builder.append(line).append("\n");
 			}
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return builder.toString();
 	}
 
 	public static void write(String webpage, long id) {
-		try(BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("D:/Projetos/Projetos para portfolio/bookmark-app/pages/" + String.valueOf(id) + ".html"), "UTF-8"))){
+		try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream(
+						"D:/Projetos/Projetos para portfolio/bookmark-app/pages/" + String.valueOf(id) + ".html"),
+				"UTF-8"))) {
 			bw.write(webpage);
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 }
