@@ -104,11 +104,14 @@ public class BookmarkManager {
 	public void setKidFriendlyStatus(KidFriendlyStatus kidFriendlyStatus, Bookmark bookmark, User user) {
 		bookmark.setKidFriendlyStatus(kidFriendlyStatus);
 		bookmark.setKidFriendlyMarkedBy(user);
+		
+		dao.updateKidFriendlyStatus(bookmark);
 	}
 
 	public void share(User user, Bookmark bookmark) {
 		bookmark.setSharedBy(user);
 		
+		dao.updateSharedBy(bookmark);
 		System.out.println(((Shareable) bookmark).getItemData());
 		
 	}
